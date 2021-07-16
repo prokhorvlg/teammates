@@ -32,8 +32,8 @@ req.end();
 
 // The GraphQL schema in string form
 const typeDefs = `
-  type Query { 
-      people: [Person] 
+  type Query {
+      people: [Person]
       person(id: ID!): Person
     }
   type Mutation {
@@ -98,6 +98,6 @@ app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 // Start the server
-app.listen(8080, () => {
+app.listen(process.env.PORT || 8080, () => {
     console.log(`Welcome to the Firstbase Frontend Coding Challenge API\n GraphiQL: http://localhost:8080/graphiql\n GOOD LUCK!`);
 });
