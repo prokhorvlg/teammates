@@ -1,42 +1,103 @@
 const express = require('express');
-const path = require('path');
-const cluster = require('cluster');
-const numCPUs = require('os').cpus().length;
+const bodyParser = require('body-parser');
+const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+const { makeExecutableSchema } = require('graphql-tools');
+const cors = require('cors');
 
-const isDev = process.env.NODE_ENV !== 'production';
-const PORT = process.env.PORT || 5000;
+// initialize people datastore
+let people = [];
 
-// Multi-process to utilize all CPU cores.
-if (!isDev && cluster.isMaster) {
-  console.error(`Node cluster master ${process.pid} is running`);
-
-  // Fork workers.
-  for (let i = 0; i < numCPUs; i++) {
-    cluster.fork();
-  }
-
-  cluster.on('exit', (worker, code, signal) => {
-    console.error(`Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`);
-  });
-
-} else {
-  const app = express();
-
-  // Priority serve any static files.
-  app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
-
-  // Answer API requests.
-  app.get('/api', function (req, res) {
-    res.set('Content-Type', 'application/json');
-    res.send('{"message":"Hello from the custom server!"}');
-  });
-
-  // All remaining requests return the React app, so it can handle routing.
-  app.get('*', function(request, response) {
-    response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
-  });
-
-  app.listen(PORT, function () {
-    console.error(`Node ${isDev ? 'dev server' : 'cluster worker '+process.pid}: listening on port ${PORT}`);
-  });
+// load seed people
+const https = require('https')
+const options = {
+    hostname: 'randomuser.me',
+    path: '/api/?results=100&inc=name,email,picture',
+    method: 'GET'
 }
+
+const req = https.request(options, res => {
+    console.log('Seeding data...');
+    let data = '';
+    res.on('data', chunk => {
+        data += chunk;
+    });
+    res.on('end', () => {
+        people = JSON.parse(data).results;
+        people.forEach((p,idx) => p.id = idx);
+        console.log('Data Seeded!');
+    })
+
+});
+req.end();
+
+// The GraphQL schema in string form
+const typeDefs = `
+  type Query {
+      people: [Person]
+      person(id: ID!): Person
+    }
+  type Mutation {
+      editPerson(id: ID!, payload:EditPerson): Person!
+  }
+  input EditPerson { title: String, first: String last: String, email: String}
+  type Name { title: String, first: String, last: String}
+  type Picture { large: String, medium: String, thumbnail: String}
+  type Person { id: ID!, name: Name, email: String, picture: Picture }
+`;
+
+// The resolvers
+const resolvers = {
+    Query: {
+        people: () => people,
+        person: (_, args) => {
+            const idx = people.findIndex(p => p.id === parseInt(args.id));
+            if (idx < 0) {
+                throw error('Person not found');
+            }
+            return people[idx];
+        }
+    },
+    Mutation: {
+        editPerson: (_, args) => {
+            const idx = people.findIndex(p => p.id == parseInt(args.id));
+            if (idx < 0) {
+                throw error('Person not found');
+            }
+            if(args.payload.title) {
+                people[idx].name.title = args.payload.title;
+            }
+            if(args.payload.first) {
+                people[idx].name.first = args.payload.first;
+            }
+            if(args.payload.last) {
+                people[idx].name.last = args.payload.last;
+            }
+            if(args.payload.email) {
+                people[idx].email = args.payload.email;
+            }
+            return people[idx];
+        }
+    }
+};
+
+// Put together a schema
+const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
+});
+
+// Initialize the app
+const app = express();
+
+app.use(cors());
+
+// The GraphQL endpoint
+app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+
+// GraphiQL, a visual editor for queries
+app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+
+// Start the server
+app.listen(8080, () => {
+    console.log(`Welcome to the Firstbase Frontend Coding Challenge API\n GraphiQL: http://localhost:8080/graphiql\n GOOD LUCK!`);
+});
