@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
@@ -100,4 +101,13 @@ app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 // Start the server
 app.listen(process.env.PORT || 5000, () => {
     console.log(`Welcome to the Firstbase Frontend Coding Challenge API\n GraphiQL: http://localhost:8080/graphiql\n GOOD LUCK!`);
+});
+
+// Serve the react page
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, '../app/build')));
+
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../app/build', 'index.html'));
 });
