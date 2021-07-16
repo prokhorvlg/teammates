@@ -98,6 +98,6 @@ app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 // Start the server
-app.listen(process.env.PORT || 8080, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log(`Welcome to the Firstbase Frontend Coding Challenge API\n GraphiQL: http://localhost:8080/graphiql\n GOOD LUCK!`);
 });
