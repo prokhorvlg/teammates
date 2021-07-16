@@ -32,8 +32,8 @@ req.end();
 
 // The GraphQL schema in string form
 const typeDefs = `
-  type Query {
-      people: [Person]
+  type Query { 
+      people: [Person] 
       person(id: ID!): Person
     }
   type Mutation {
