@@ -5,17 +5,16 @@ const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
 const cors = require('cors');
 
-// initialize people datastore
+// Initialize people datastore.
 let people = [];
 
-// load seed people
+// Load seed people.
 const https = require('https')
 const options = {
     hostname: 'randomuser.me',
-    path: '/api/?results=100&inc=name,email,picture',
+    path: '/api/?results=100&inc=name,email,picture,phone,cell',
     method: 'GET'
 }
-
 const req = https.request(options, res => {
     console.log('Seeding data...');
     let data = '';
@@ -25,13 +24,13 @@ const req = https.request(options, res => {
     res.on('end', () => {
         people = JSON.parse(data).results;
         people.forEach((p,idx) => p.id = idx);
-        console.log('Data Seeded!');
+        console.log('Data seeded.');
     })
 
 });
 req.end();
 
-// The GraphQL schema in string form
+// GraphQL schema in string form.
 const typeDefs = `
   type Query {
       people: [Person]
@@ -40,13 +39,13 @@ const typeDefs = `
   type Mutation {
       editPerson(id: ID!, payload:EditPerson): Person!
   }
-  input EditPerson { title: String, first: String last: String, email: String}
+  input EditPerson { title: String, first: String last: String, email: String, phone: String, cell: String}
   type Name { title: String, first: String, last: String}
   type Picture { large: String, medium: String, thumbnail: String}
-  type Person { id: ID!, name: Name, email: String, picture: Picture }
+  type Person { id: ID!, name: Name, email: String, picture: Picture, phone: String, cell: String }
 `;
 
-// The resolvers
+// Resolvers.
 const resolvers = {
     Query: {
         people: () => people,
@@ -76,34 +75,40 @@ const resolvers = {
             if(args.payload.email) {
                 people[idx].email = args.payload.email;
             }
+            if(args.payload.phone) {
+                people[idx].phone = args.payload.phone;
+            }
+            if(args.payload.cell) {
+                people[idx].cell = args.payload.cell;
+            }
             return people[idx];
         }
     }
 };
 
-// Put together a schema
+// Put together a schema.
 const schema = makeExecutableSchema({
     typeDefs,
     resolvers,
 });
 
-// Initialize the app
+// Initialize the app.
 const app = express();
 
 app.use(cors());
 
-// The GraphQL endpoint
+// GraphQL endpoint.
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 
-// GraphiQL, a visual editor for queries
+// GraphiQL, visual editor for queries.
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
-// Start the server
+// Start the server.
 app.listen(process.env.PORT || 5000, () => {
-    console.log(`Welcome to the Firstbase Frontend Coding Challenge API\n GraphiQL: http://localhost:8080/graphiql\n GOOD LUCK!`);
+    console.log(`Server is fully operational.`);
 });
 
-// Serve the react page
+// Serve the react page.
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../app/build')));
 

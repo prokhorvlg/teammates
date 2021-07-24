@@ -1,0 +1,251 @@
+$breakpoint-tiny: 375px;
+$breakpoint-small: 768px;
+$breakpoint-med: 1024px;
+$breakpoint-large: 1200px;
+$breakpoint-huge: 1800px;
+
+$brand-highlight: #00cd7d;
+$brand-dark: #002617;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+$font-heading: 'Roboto Slab', serif;
+$font-body: 'Open Sans', sans-serif;
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
+}
+
+p, input, button {
+  font-family: $font-body;
+  font-weight: 600;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  #root {
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      max-height: 100%;
+
+      .app-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        //height: 90px;
+        padding: 20px;
+        background: $brand-dark;
+        color: white;
+        h1 {
+          font-weight: 500;
+          margin: 0 0 0 40px;
+          padding-bottom: 5px;
+          span {
+            color: $brand-highlight;
+          }
+        }
+        p {
+          margin: 0 0 0 70px;
+          padding-top: 2px;
+        }
+      }
+      .app-body {
+        display: flex;
+        flex-direction: row;
+        height: calc(100% - 90px);
+        max-height: 100%;
+        padding: 0 40px 0 40px;
+        .body-employee-list {
+          max-height: 100%;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          .list-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            .list-header-found {
+              p {
+                font-weight: 700;
+                span {
+                  color: $brand-highlight;
+                }
+              }
+            }
+            .list-header-search {
+              input {
+                border-radius: 30px;
+                border: 3px solid $brand-highlight;
+                padding: 10px;
+                width: 300px;
+              }
+              .fa-search-icon {
+                color: $brand-highlight;
+                position: relative;
+                right: 35px;
+                user-select: none;
+                pointer-events: none;
+              }
+            }
+          }
+          .list-body {
+            list-style: none;
+            overflow-y: auto;
+            .list-body-element {
+              margin-right: 20px;
+              button {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                border: 3px solid transparent;
+                border-radius: 30px;
+                background: none;
+                cursor: pointer;
+                width: 100%;
+                padding: 5px;
+                margin-bottom: 5px;
+
+
+                &:hover {
+                  border-color: $brand-highlight;
+                  .fa-arrow-icon {
+                    display: block;
+                  }
+                }
+                &.selected {
+                  background: $brand-highlight;
+                  color: white;
+                  .fa-arrow-icon {
+                    display: block;
+                    color: white;
+                  }
+                }
+
+                img {
+                  border-radius: 50%;
+                }
+                .employee-name {
+                  margin-left: 20px;
+                  width: 30%;
+                  max-width: 200px;
+                  text-align: left;
+                }
+                .employee-title {
+                  margin-left: 20px;
+                  text-align: left;
+                  flex: 1;
+                }
+                .fa-arrow-icon {
+                  font-size: 1.3rem;
+                  display: none;
+                  color: $brand-highlight;
+                  margin-right: 10px;
+                }
+
+              }
+            }
+          }
+
+        }
+        .body-employee-details {
+          display: flex;
+          flex-direction: column;
+          min-width: 450px;
+          width: 20%;
+          padding: 10px;
+          border: 3px solid $brand-highlight;
+          border-radius: 30px;
+          margin: 40px;
+          &.no-selected {
+            justify-content: center;
+            align-items: center;
+            height: calc(100%-10px);
+            border-color: red;
+            svg {
+              color: red;
+              font-size: 5rem;
+            }
+
+          }
+          .details-color-bar {
+            background: $brand-highlight;
+            height: 150px;
+            width: 100%;
+            border-radius: 20px;
+          }
+          .details-centered-block {
+            margin-top: -70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            img {
+              width: 120px;
+              height: 120px;
+              border: 10px solid white;
+              border-radius: 50%;
+            }
+            h2 {
+              margin: 10px 0 0 0;
+            }
+            p {
+              margin: 5px 0 0 0;
+              color: $brand-highlight;
+              font-weight: 700;
+            }
+          }
+          .details-list {
+            flex: 1;
+            list-style: none;
+            margin: 20px 0 0 0;
+            padding: 10px;
+            .details-list-item {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              margin: 0 0 10px 0;
+              svg {
+                color: $brand-highlight;
+                width: 30px;
+              }
+              p {
+                margin: 0 0 0 10px;
+              }
+            }
+          }
+          button {
+            border: 3px solid black;
+            border-radius: 30px;
+            width: 200px;
+            margin: 0 auto;
+            padding: 10px;
+            font-weight: 700;
+            background: none;
+            cursor: pointer;
+            margin-bottom: 30px;
+
+            &:hover {
+              border-color: $brand-highlight;
+              color: $brand-highlight;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}

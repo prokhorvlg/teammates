@@ -1,4 +1,4 @@
-# Firstbase Frontend Coding Challenge
+# teammates: A demo employee directory project.
 Welcome to the Firstbase Frontend Coding Challenge.
 
 All of the instructions to complete this challenge are found in this readme. If you have any questions please e-mail the hiring manager you are working with.
@@ -30,7 +30,7 @@ The design and presentation of this is entirely up to you. Remember this is a ch
 4. `$ npm start`
 
 GraphQL GraphiQL tool / documentation url:
-https://localhost:8080/graphiql 
+https://localhost:8080/graphiql
 
 ## I'm done now what?
 Congratulations on finishing!
