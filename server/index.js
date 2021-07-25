@@ -25,8 +25,7 @@ const req = https.request(options, res => {
         people = JSON.parse(data).results;
         people.forEach((p,idx) => p.id = idx);
         console.log('Data seeded.');
-    })
-
+    });
 });
 req.end();
 

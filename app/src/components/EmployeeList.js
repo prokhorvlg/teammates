@@ -50,7 +50,7 @@ const EmployeeList = ({ employees, searchString, setSearchResultsCount, selected
         );
     } else {
       return (
-        <div className="list-body-element no-found">
+        <div className="list-body no-found">
           <FontAwesomeIcon icon={faTimes} className="fa-link-icon" />
           <p>No employees found.</p>
         </div>

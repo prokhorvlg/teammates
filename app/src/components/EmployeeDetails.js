@@ -4,7 +4,7 @@ import { gql, useMutation } from '@apollo/client';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPhone, faMobile, faEnvelope, faTimes, faUserEdit, faCheck, faBriefcase, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faPhone, faMobile, faEnvelope, faTimes, faUserEdit, faCheck, faBriefcase, faUser, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
@@ -88,7 +88,7 @@ const EmployeeDetails = ({ employees, selectedEmployee, selectedScreen, refetch,
         <div className={"body-employee-details" + ((selectedScreen === 1) ? " mobile-active" : " mobile-inactive")}>
           <div className="details-color-bar">
             <button className="mobile-only" onClick={() => { setSelectedScreen(0); }}>
-              back
+              <FontAwesomeIcon icon={faChevronLeft} className="fa-link-icon" />
             </button>
           </div>
           <div className="details-centered-block">
