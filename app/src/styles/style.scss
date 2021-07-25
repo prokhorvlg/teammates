@@ -170,17 +170,34 @@ body {
         @media (max-width: $breakpoint-med) {
           height: auto;
           flex: 1;
+          //border: 3px solid $brand-highlight;
+          padding: 0;
+          max-width: 90%;
         }
-        p, li {
-          font-size: 0.9rem;
-          padding-bottom: 5px;
-        }
-        .brand-color {
-          color: $brand-highlight;
+        .intro-tab-contents-inner {
+          margin-right: 20px;
+          h2 {
+            font-size: 1.1rem;
+            color: $brand-highlight;
+          }
+          h3 {
+            font-size: 1rem;
+          }
+          p, li {
+            font-size: 0.8rem;
+            padding-bottom: 5px;
+          }
+          .brand-color {
+            color: $brand-highlight;
+          }
         }
         .mobile-tab-title {
           text-align: center;
           margin: 0 0 5px 0;
+          font-family: $font-body;
+          font-weight: bold;
+          font-size: 1rem;
+          letter-spacing: -0.01rem;
         }
       }
       .intro-modal-close {
@@ -541,6 +558,9 @@ body {
               margin: 20px 0 0 0;
               padding: 20px;
               overflow-y: auto;
+              @media (max-width: $breakpoint-med) {
+                margin: 0;
+              }
               .details-list-item {
                 display: flex;
                 flex-direction: row;
