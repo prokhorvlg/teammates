@@ -85,7 +85,7 @@ export const App = () => {
     <div className="app-container">
       <div className="app-header">
         <h1><span>team</span>mates</h1>
-        <p>Employee Directory</p>
+        <p className="desktop-only">Employee Directory</p>
         <div className="intro-modal-open-container">
           <button onClick={() => { setIntroModalOpen(true); }} className="intro-modal-open">
             <FontAwesomeIcon icon={faQuestion} className="fa-icon" />
@@ -93,7 +93,7 @@ export const App = () => {
         </div>
       </div>
       <div className="app-body">
-        <div className="body-employee-list">
+        <div className={"body-employee-list" + ((selectedScreen === 0) ? " mobile-active" : " mobile-inactive")}>
           <div className="list-header">
             <FoundCountBar
               searchString={searchString}
@@ -107,12 +107,15 @@ export const App = () => {
             searchString={searchString}
             setSearchResultsCount={setSearchResultsCount}
             selectedEmployee={selectedEmployee}
-            setSelectedEmployee={setSelectedEmployee} />
+            setSelectedEmployee={setSelectedEmployee}
+            setSelectedScreen={setSelectedScreen} />
         </div>
         <EmployeeDetails
           employees={data.people}
           selectedEmployee={selectedEmployee}
-          refetch={refetch} />
+          selectedScreen={selectedScreen}
+          refetch={refetch}
+          setSelectedScreen={setSelectedScreen} />
       </div>
     </div>
     </>

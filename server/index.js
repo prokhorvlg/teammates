@@ -103,11 +103,6 @@ app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 // GraphiQL, visual editor for queries.
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
-// Start the server.
-app.listen(process.env.PORT || 5000, () => {
-    console.log(`Server is fully operational.`);
-});
-
 // Serve the react page.
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../app/build')));
@@ -115,4 +110,9 @@ app.use(express.static(path.resolve(__dirname, '../app/build')));
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {
   response.sendFile(path.resolve(__dirname, '../app/build', 'index.html'));
+});
+
+// Start the server.
+app.listen(process.env.PORT || 5000, () => {
+    console.log(`Server is fully operational.`);
 });

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
-const EmployeeList = ({ employees, searchString, setSearchResultsCount, selectedEmployee, setSelectedEmployee }) => {
+const EmployeeList = ({ employees, searchString, setSearchResultsCount, selectedEmployee, setSelectedEmployee, setSelectedScreen }) => {
   if (employees) {
     // FILTERING LOGIC: Filters all employees against search string before displaying.
     const filteredEmployees = useMemo(() => {
@@ -43,13 +43,14 @@ const EmployeeList = ({ employees, searchString, setSearchResultsCount, selected
                 employee={employee}
                 selectedEmployee={selectedEmployee}
                 setSelectedEmployee={setSelectedEmployee}
+                setSelectedScreen={setSelectedScreen}
               />))}
           </PerfectScrollbar>
         </ul>
         );
     } else {
       return (
-        <div className="list-body no-found">
+        <div className="list-body-element no-found">
           <FontAwesomeIcon icon={faTimes} className="fa-link-icon" />
           <p>No employees found.</p>
         </div>

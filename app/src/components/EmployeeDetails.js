@@ -23,7 +23,7 @@ const UPDATE_EMPLOYEE = gql`
   }
 `;
 
-const EmployeeDetails = ({ employees, selectedEmployee, refetch }) => {
+const EmployeeDetails = ({ employees, selectedEmployee, selectedScreen, refetch, setSelectedScreen }) => {
   const [employeeEditMode, setEmployeeEditMode] = useState(false);
   const [selectedEmployeeData, setSelectedEmployeeData] = useState(null);
   const [updateEmployee] = useMutation(UPDATE_EMPLOYEE);
@@ -85,8 +85,12 @@ const EmployeeDetails = ({ employees, selectedEmployee, refetch }) => {
 
     if (!employeeEditMode) {
       return (
-        <div className="body-employee-details">
-          <div className="details-color-bar"></div>
+        <div className={"body-employee-details" + ((selectedScreen === 1) ? " mobile-active" : " mobile-inactive")}>
+          <div className="details-color-bar">
+            <button className="mobile-only" onClick={() => { setSelectedScreen(0); }}>
+              back
+            </button>
+          </div>
           <div className="details-centered-block">
             <img src={selectedEmployeeData.picture.large} />
             <h2>{selectedEmployeeData.name.first} {selectedEmployeeData.name.last}</h2>
@@ -118,7 +122,7 @@ const EmployeeDetails = ({ employees, selectedEmployee, refetch }) => {
       );
     } else {
       return (
-        <div className="body-employee-details">
+        <div className={"body-employee-details" + ((selectedScreen === 1) ? " mobile-active" : " mobile-inactive")}>
           <div className="details-color-bar"></div>
           <div className="details-centered-block">
             <img src={selectedEmployeeData.picture.large} />
@@ -162,7 +166,7 @@ const EmployeeDetails = ({ employees, selectedEmployee, refetch }) => {
     }
   } else {
     return (
-      <div className="body-employee-details no-selected">
+      <div className={"body-employee-details no-selected" + ((selectedScreen === 1) ? " mobile-active" : " mobile-inactive")}>
         <FontAwesomeIcon icon={faTimes} className="fa-link-icon" />
         <p>No employee selected.</p>
       </div>

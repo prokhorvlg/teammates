@@ -39,6 +39,9 @@ const IntroModal = ({ introModalOpen, setIntroModalOpen }) => {
       </div>
 
         <div className="intro-tab-contents">
+          { activeIntroScreen === 0 && <h2 className="mobile-tab-title mobile-only">About this site</h2>}
+          { activeIntroScreen === 1 && <h2 className="mobile-tab-title mobile-only">Features and implementation</h2>}
+          { activeIntroScreen === 2 && <h2 className="mobile-tab-title mobile-only">Links to my stuff</h2>}
           <PerfectScrollbar>
           { activeIntroScreen === 0 &&
             <div className="intro-tab-1-contents">
