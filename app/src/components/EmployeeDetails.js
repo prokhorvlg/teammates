@@ -4,8 +4,9 @@ import { gql, useMutation } from '@apollo/client';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPhone, faMobile, faEnvelope, faTimes } from '@fortawesome/free-solid-svg-icons'
-//import { faTimesCircle } from '@fortawesome/free-regular-svg-icons'
+import { faPhone, faMobile, faEnvelope, faTimes, faUserEdit, faCheck, faBriefcase, faUser } from '@fortawesome/free-solid-svg-icons'
+
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 const UPDATE_EMPLOYEE = gql`
   mutation UpdateEmployee($id: ID!, $EditPerson: EditPerson!) {
@@ -91,49 +92,70 @@ const EmployeeDetails = ({ employees, selectedEmployee, refetch }) => {
             <h2>{selectedEmployeeData.name.first} {selectedEmployeeData.name.last}</h2>
             <p>Front End Developer</p>
           </div>
-          <ul className="details-list">
-            <li className="details-list-item">
-              <FontAwesomeIcon icon={faEnvelope} className="fa-link-icon" />
-              <p>{selectedEmployeeData.email}</p>
-            </li>
-            <li className="details-list-item">
-              <FontAwesomeIcon icon={faPhone} className="fa-link-icon" />
-              <p>{selectedEmployeeData.phone}</p>
-            </li>
-            <li className="details-list-item">
-              <FontAwesomeIcon icon={faMobile} className="fa-link-icon" />
-              <p>{selectedEmployeeData.cell}</p>
-            </li>
-          </ul>
-          <button onClick={() => { setEmployeeEditMode(true) }}>Edit Details</button>
+          <PerfectScrollbar>
+            <ul className="details-list">
+              <li className="details-list-item">
+                <FontAwesomeIcon icon={faEnvelope} className="fa-link-icon" />
+                <p>{selectedEmployeeData.email}</p>
+              </li>
+              <li className="details-list-item">
+                <FontAwesomeIcon icon={faPhone} className="fa-link-icon" />
+                <p>{selectedEmployeeData.phone}</p>
+              </li>
+              <li className="details-list-item">
+                <FontAwesomeIcon icon={faMobile} className="fa-link-icon" />
+                <p>{selectedEmployeeData.cell}</p>
+              </li>
+            </ul>
+          </PerfectScrollbar>
+          <div className="details-button-area">
+            <button onClick={() => { setEmployeeEditMode(true); }}>
+              <FontAwesomeIcon icon={faUserEdit} className="fa-link-icon" />
+              <p>Edit Details</p>
+            </button>
+          </div>
         </div>
       );
     } else {
       return (
         <div className="body-employee-details">
-          <div className="body-employee-details">
-            <div className="details-color-bar"></div>
-            <div className="details-centered-block">
-              <img src={selectedEmployeeData.picture.large} />
-              <input type="text" onChange={(e) => { onEmployeeInput(e.target.value, 'first'); }} value={selectedEmployeeData.name.first} />
-              <input type="text" onChange={(e) => { onEmployeeInput(e.target.value, 'last'); }} value={selectedEmployeeData.name.last} />
-              <p>Front End Developer</p>
-            </div>
+          <div className="details-color-bar"></div>
+          <div className="details-centered-block">
+            <img src={selectedEmployeeData.picture.large} />
+          </div>
+          <PerfectScrollbar>
             <ul className="details-list">
-              <li className="details-list-item">
-                <FontAwesomeIcon icon={faEnvelope} className="fa-link-icon" />
+              <li className="details-list-item edit-mode">
+                <p><FontAwesomeIcon icon={faUser} className="fa-link-icon" /> First Name</p>
+                <input type="text" onChange={(e) => { onEmployeeInput(e.target.value, 'first'); }} value={selectedEmployeeData.name.first} />
+              </li>
+              <li className="details-list-item edit-mode">
+                <p><FontAwesomeIcon icon={faUser} className="fa-link-icon" /> Last Name</p>
+                <input type="text" onChange={(e) => { onEmployeeInput(e.target.value, 'last'); }} value={selectedEmployeeData.name.last} />
+              </li>
+              <li className="details-list-item edit-mode">
+                <p><FontAwesomeIcon icon={faBriefcase} className="fa-link-icon" /> Occupation</p>
+                <input type="text" value="Front End Developer" disabled />
+              </li>
+              <li className="details-list-item edit-mode">
+                <p><FontAwesomeIcon icon={faEnvelope} className="fa-link-icon" /> Email</p>
                 <input type="text" onChange={(e) => { onEmployeeInput(e.target.value, 'email'); }} value={selectedEmployeeData.email} />
               </li>
-              <li className="details-list-item">
-                <FontAwesomeIcon icon={faPhone} className="fa-link-icon" />
+              <li className="details-list-item edit-mode">
+                <p><FontAwesomeIcon icon={faPhone} className="fa-link-icon" /> Phone</p>
                 <input type="text" onChange={(e) => { onEmployeeInput(e.target.value, 'phone'); }} value={selectedEmployeeData.phone} />
               </li>
-              <li className="details-list-item">
-                <FontAwesomeIcon icon={faMobile} className="fa-link-icon" />
+              <li className="details-list-item edit-mode">
+                <p><FontAwesomeIcon icon={faMobile} className="fa-link-icon" /> Mobile</p>
                 <input type="text" onChange={(e) => { onEmployeeInput(e.target.value, 'cell'); }} value={selectedEmployeeData.cell} />
               </li>
             </ul>
-            <button onClick={() => { setEmployeeEditMode(false); }}>Save Changes</button>
+          </PerfectScrollbar>
+          <div className="details-button-area">
+            <button onClick={() => { setEmployeeEditMode(false); }}>
+              <FontAwesomeIcon icon={faCheck} className="fa-link-icon" />
+              <p>Finish Editing</p>
+            </button>
           </div>
         </div>
       );
