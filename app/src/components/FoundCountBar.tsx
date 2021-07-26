@@ -10,7 +10,7 @@ const FoundCountBar: FC<FoundCountBarProps> = ({ searchString, totalEmployees, s
   if (searchString === "") {
     return (
       <div className="list-header-found">
-        <p>Displaying all <span>{totalEmployees}</span> employees.</p>
+        <p>Displaying all {totalEmployees} employees.</p>
       </div>
     );
   } else if (searchString !== "" && searchResultsCount === 0){
@@ -23,7 +23,7 @@ const FoundCountBar: FC<FoundCountBarProps> = ({ searchString, totalEmployees, s
   } else {
     return (
       <div className="list-header-found">
-        <p>Filter matched <span>{searchResultsCount}</span> of {totalEmployees} employees.</p>
+        <p>Filter matched {searchResultsCount} of {totalEmployees} employees.</p>
       </div>
     );
   }

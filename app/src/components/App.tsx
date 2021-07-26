@@ -11,7 +11,7 @@ import FoundCountBar from './FoundCountBar';
 import IntroModal from './IntroModal';
 
 import { GET_EMPLOYEES } from '../queries/queries';
-import {Employees, Person, Name, Picture } from '../types/interfaces'
+import { Employees, Person, Name, Picture } from '../types/interfaces'
 
 export const App = () => {
   // STATE: Contains relevant data for application.
@@ -34,7 +34,6 @@ export const App = () => {
   useEffect(() => {
     if (!loading && data) {
       setTotalEmployees(data.people.length);
-      console.log(data)
     }
   }, [loading]);
 
@@ -101,6 +100,12 @@ export const App = () => {
       </>
     );
   }
+
+  return (
+    <div className="loading-screen">
+      <p>Something went horribly wrong!</p>
+    </div>
+  );
 
 }
 

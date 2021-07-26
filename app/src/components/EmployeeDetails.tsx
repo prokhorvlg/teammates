@@ -95,7 +95,7 @@ const EmployeeDetails: FC<EmployeeDetailsProps> = ({ employees, selectedEmployee
 
     if (!employeeEditMode) {
       return (
-        <div className={"body-employee-details" + ((selectedScreen === 1) ? " mobile-active" : " mobile-inactive")}>
+        <div className={"body-employee-details" + ((selectedScreen === 1) ? " mobile-active" : " mobile-inactive")} data-testid="details-panel">
           <div className="details-color-bar">
             <button className="mobile-only" onClick={() => { setSelectedScreen(0); }}>
               <FontAwesomeIcon icon={faChevronLeft} className="fa-link-icon" />
@@ -123,7 +123,7 @@ const EmployeeDetails: FC<EmployeeDetailsProps> = ({ employees, selectedEmployee
             </ul>
           </PerfectScrollbar>
           <div className="details-button-area">
-            <button onClick={() => { setEmployeeEditMode(true); }}>
+            <button onClick={() => { setEmployeeEditMode(true); }} data-testid="start-edit-button">
               <FontAwesomeIcon icon={faUserEdit} className="fa-link-icon" />
               <p>Edit Details</p>
             </button>
@@ -132,7 +132,7 @@ const EmployeeDetails: FC<EmployeeDetailsProps> = ({ employees, selectedEmployee
       );
     } else {
       return (
-        <div className={"body-employee-details" + ((selectedScreen === 1) ? " mobile-active" : " mobile-inactive")}>
+        <div className={"body-employee-details" + ((selectedScreen === 1) ? " mobile-active" : " mobile-inactive")} data-testid="details-panel">
           <div className="details-color-bar"></div>
           <div className="details-centered-block">
             <img src={selectedEmployeeData.picture.large} />
@@ -166,7 +166,7 @@ const EmployeeDetails: FC<EmployeeDetailsProps> = ({ employees, selectedEmployee
             </ul>
           </PerfectScrollbar>
           <div className="details-button-area">
-            <button onClick={() => { setEmployeeEditMode(false); }}>
+            <button onClick={() => { setEmployeeEditMode(false); }} data-testid="finish-edit-button">
               <FontAwesomeIcon icon={faCheck} className="fa-link-icon" />
               <p>Finish Editing</p>
             </button>
@@ -176,7 +176,7 @@ const EmployeeDetails: FC<EmployeeDetailsProps> = ({ employees, selectedEmployee
     }
   } else {
     return (
-      <div className={"body-employee-details no-selected" + ((selectedScreen === 1) ? " mobile-active" : " mobile-inactive")}>
+      <div className={"body-employee-details no-selected" + ((selectedScreen === 1) ? " mobile-active" : " mobile-inactive")} data-testid="details-panel">
         <FontAwesomeIcon icon={faTimes} className="fa-link-icon" />
         <p>No employee selected.</p>
       </div>

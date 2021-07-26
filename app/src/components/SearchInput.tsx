@@ -10,7 +10,7 @@ type SearchInputProps = {
 const SearchInput: FC<SearchInputProps> = ({ setSearchString }) => {
   return (
     <div className="list-header-search">
-      <input type="text" onChange={(e) => { setSearchString(e.target.value); }} />
+      <input type="text" data-testid="search-input" onChange={(e) => { setSearchString(e.target.value); }} />
       <FontAwesomeIcon icon={faSearch} className="fa-search-icon" />
     </div>
   );
