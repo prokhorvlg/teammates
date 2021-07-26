@@ -1,4 +1,6 @@
-# teammates: A demo employee directory project.
+# teammates
+## A demo employee directory project.
+
 Welcome to the Firstbase Frontend Coding Challenge.
 
 All of the instructions to complete this challenge are found in this readme. If you have any questions please e-mail the hiring manager you are working with.

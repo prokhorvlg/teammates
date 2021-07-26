@@ -1,10 +1,22 @@
-import React, { useMemo, useEffect } from 'react';
-import EmployeeListElement from './EmployeeListElement';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import PerfectScrollbar from 'react-perfect-scrollbar'
+import React, { FC, useMemo, useEffect } from 'react';
 
-const EmployeeList = ({ employees, searchString, setSearchResultsCount, selectedEmployee, setSelectedEmployee, setSelectedScreen }) => {
+import EmployeeListElement from './EmployeeListElement';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+
+import { Person } from '../types/interfaces'
+
+type EmployeeListProps = {
+  employees: Person[];
+  searchString: string;
+  setSearchResultsCount(n: number): void;
+  selectedEmployee: number;
+  setSelectedEmployee(n: number): void;
+  setSelectedScreen(n: number): void;
+}
+
+const EmployeeList: FC<EmployeeListProps> = ({ employees, searchString, setSearchResultsCount, selectedEmployee, setSelectedEmployee, setSelectedScreen }) => {
   if (employees) {
     // FILTERING LOGIC: Filters all employees against search string before displaying.
     const filteredEmployees = useMemo(() => {
@@ -18,7 +30,6 @@ const EmployeeList = ({ employees, searchString, setSearchResultsCount, selected
         `;
           let subMatch = true;
           for (const searchSubString of searchArray) {
-          //searchArray.forEach((searchSubString) => {
             if (!employeeToString.includes(searchSubString)) {
               subMatch = false;
               break;

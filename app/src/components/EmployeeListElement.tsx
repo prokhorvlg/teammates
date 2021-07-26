@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-const EmployeeListElement = ({ employee, selectedEmployee, setSelectedEmployee, setSelectedScreen }) => {
+import { Person } from '../types/interfaces'
+
+type EmployeeListElementProps = {
+  employee: Person;
+  selectedEmployee: number;
+  setSelectedEmployee(n: number): void;
+  setSelectedScreen(n: number): void;
+}
+
+const EmployeeListElement: FC<EmployeeListElementProps> = ({ employee, selectedEmployee, setSelectedEmployee, setSelectedScreen }) => {
+
   const employeeIsSelected = (selectedEmployee === employee.id) ? true : false;
   return (
     <li className="list-body-element">

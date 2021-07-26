@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faQuestionCircle, faStar, faLink, faArrowRight, faCodeBranch } from '@fortawesome/free-solid-svg-icons'
-import PerfectScrollbar from 'react-perfect-scrollbar'
+import React, { FC, useState } from 'react';
 
-const IntroModal = ({ introModalOpen, setIntroModalOpen }) => {
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle, faStar, faLink, faArrowRight, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
+
+type IntroModalProps = {
+  introModalOpen: boolean;
+  setIntroModalOpen(b: boolean): void;
+}
+
+const IntroModal: FC<IntroModalProps> = ({ introModalOpen, setIntroModalOpen }) => {
   const [activeIntroScreen, setActiveIntroScreen] = useState(0);
 
   return (

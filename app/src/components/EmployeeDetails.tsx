@@ -1,52 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import { findObjectInArray } from '../utils/utils'
-import { gql, useMutation } from '@apollo/client';
+import React, { FC, useState, useEffect } from 'react';
+
+import { findObjectInArray } from '../utils/utils';
+import { useMutation } from '@apollo/client';
 import { useDebouncedCallback } from 'use-debounce';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPhone, faMobile, faEnvelope, faTimes, faUserEdit, faCheck, faBriefcase, faUser, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone, faMobile, faEnvelope, faTimes, faUserEdit, faCheck, faBriefcase, faUser, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-import PerfectScrollbar from 'react-perfect-scrollbar'
+import { UPDATE_EMPLOYEE } from '../queries/queries';
+import { Person } from '../types/interfaces'
 
-const UPDATE_EMPLOYEE = gql`
-  mutation UpdateEmployee($id: ID!, $EditPerson: EditPerson!) {
-    editPerson(id: $id, payload: $EditPerson) {
-        name {
-          title
-          first
-          last
-        }
-        email
-        phone
-        cell
-    }
-  }
-`;
+type EmployeeDetailsProps = {
+  employees: Person[];
+  selectedEmployee: number;
+  selectedScreen: number;
+  refetch(): void;
+  setSelectedScreen(n: number): void;
+}
 
-const EmployeeDetails = ({ employees, selectedEmployee, selectedScreen, refetch, setSelectedScreen }) => {
+interface DefaultEmployeeObject {
+  id: number;
+  EditPerson: EditPerson;
+}
+
+interface EditPerson {
+  first: string;
+  last: string;
+  email: string;
+  phone: string;
+  cell: string;
+}
+
+const EmployeeDetails: FC<EmployeeDetailsProps> = ({ employees, selectedEmployee, selectedScreen, refetch, setSelectedScreen }) => {
   const [employeeEditMode, setEmployeeEditMode] = useState(false);
-  const [selectedEmployeeData, setSelectedEmployeeData] = useState(null);
-  const [updateEmployee] = useMutation(UPDATE_EMPLOYEE);
+  const [selectedEmployeeData, setSelectedEmployeeData] = useState<Person>();
+  const [updateEmployee] = useMutation<EditPerson>(UPDATE_EMPLOYEE);
 
   const saveEmployeeDebounce = useDebouncedCallback((updateEmployeeObject) => {
     console.log(updateEmployeeObject);
     updateEmployee({
       variables: updateEmployeeObject
-    }).then((employeeData) => {
+    }).then(() => {
       refetch();
     });
   }, 1000);
 
   useEffect(() => {
     if (selectedEmployee && employees) {
-      setSelectedEmployeeData(findObjectInArray(selectedEmployee, employees));
+      const selectedData = findObjectInArray(selectedEmployee, employees);
+      if (selectedData) {
+        setSelectedEmployeeData(selectedData);
+      }
     }
   }, [selectedEmployee]);
 
   if (selectedEmployee && selectedEmployeeData) {
     // Whenever selected employee changes, change the data this component uses and manipulates.
-
-    const defaultEmployeeObject = {
+    let updateEmployeeObject: DefaultEmployeeObject = {
       id: selectedEmployee,
       EditPerson: {
         first: selectedEmployeeData.name.first,
@@ -56,8 +67,7 @@ const EmployeeDetails = ({ employees, selectedEmployee, selectedScreen, refetch,
         cell: selectedEmployeeData.cell
       }
     };
-    let updateEmployeeObject = defaultEmployeeObject;
-    const onEmployeeInput = (value, type) => {
+    const onEmployeeInput = (value: string, type: string) => {
       switch (type) {
         case "first":
           updateEmployeeObject.EditPerson.first = value;

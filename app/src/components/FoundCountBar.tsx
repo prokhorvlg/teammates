@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const FoundCountBar = ({ searchString, totalEmployees, searchResultsCount }) => {
+type FoundCountBarProps = {
+  searchString: string;
+  totalEmployees: number;
+  searchResultsCount: number;
+}
+
+const FoundCountBar: FC<FoundCountBarProps> = ({ searchString, totalEmployees, searchResultsCount }) => {
   if (searchString === "") {
     return (
       <div className="list-header-found">

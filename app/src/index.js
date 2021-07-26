@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import './styles/style.scss';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import App from './App';
-
+import App from './components/App';
 import {
   ApolloClient,
   InMemoryCache,
