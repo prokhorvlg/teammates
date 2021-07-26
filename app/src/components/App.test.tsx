@@ -5,7 +5,7 @@
 import React from 'react';
 
 // BASIC REACT TESTING IMPORTS
-import { act, render, fireEvent, cleanup, screen, waitFor } from "@testing-library/react";
+import { render, cleanup, screen, waitFor } from "@testing-library/react";
 import userEvent from '@testing-library/user-event'
 
 // APOLLO TESTING IMPORTS
@@ -14,7 +14,6 @@ import { GET_EMPLOYEES, UPDATE_EMPLOYEE } from '../queries/queries'
 
 // COMPONENT IMPORTS
 import App from './App'
-import FoundCountBar from './FoundCountBar';
 
 afterEach(() => {
   cleanup();
@@ -92,6 +91,35 @@ const GraphQLMocks = [
       },
       loading: false,
       error: null,
+    },
+  },
+  {
+    request: {
+      query: UPDATE_EMPLOYEE,
+      variables: {
+        id: "0",
+        EditPerson: {
+          first: "JamesAgent",
+          last: "Bond",
+          email: "JamesBond@example.com",
+          phone: "123",
+          cell: "1234"
+        }
+      },
+    },
+    result: {
+      data: {
+        "__typename": "Person",
+        "name": {
+            "__typename": "Name",
+            "title": "Mr",
+            "first": "JamesAgent",
+            "last": "Bond"
+        },
+        "email": "JamesBond@example.com",
+        "phone": "123",
+        "cell": "1234"
+      }
     },
   },
 ];
@@ -232,8 +260,15 @@ describe('details and edit view works as expected', () => {
       </MockedProvider>
     );
     await waitFor(() => screen.getByText('James Bond'));
-
-
+    userEvent.click(screen.getAllByTestId('list-body-element')[0]);
+    userEvent.click(screen.getByTestId('start-edit-button'));
+    userEvent.type(screen.getByTestId('first-name-input'), 'Agent');
+    //await waitFor(() => screen.getByText('Agent'));
+    //await new Promise((r) => setTimeout(r, 2000));
+    await waitFor(() => {
+      expect(screen.getByText(/Agent/)).toBeInTheDocument();
+    })
+    //expect(screen.getByText(/Agent/)).toBeInTheDocument();
   });
 
   it('displays details screen when finish editing is clicked', async () => {
@@ -250,3 +285,7 @@ describe('details and edit view works as expected', () => {
     expect(detailsPanel).toHaveTextContent(/James Bond/);
   });
 });
+
+// shows intro dialog on start with correct content
+// clicking tab 2 shows tab 2 content
+// clicking close closes the intro dialog

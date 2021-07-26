@@ -29,12 +29,6 @@ const IntroModal: FC<IntroModalProps> = ({ introModalOpen, setIntroModalOpen }) 
           </li>
           <li>
             <button onClick={() => { setActiveIntroScreen(1); }} className={(activeIntroScreen === 1) ? "active" : ""}>
-              <FontAwesomeIcon icon={faStar} className="fa-icon" />
-              <p>Features and implementation</p>
-            </button>
-          </li>
-          <li>
-            <button onClick={() => { setActiveIntroScreen(2); }} className={(activeIntroScreen === 2) ? "active" : ""}>
               <FontAwesomeIcon icon={faLink} className="fa-icon" />
               <p>Links to my stuff</p>
             </button>
@@ -44,8 +38,7 @@ const IntroModal: FC<IntroModalProps> = ({ introModalOpen, setIntroModalOpen }) 
 
         <div className="intro-tab-contents">
           { activeIntroScreen === 0 && <h2 className="mobile-tab-title mobile-only">About this site</h2>}
-          { activeIntroScreen === 1 && <h2 className="mobile-tab-title mobile-only">Features and implementation</h2>}
-          { activeIntroScreen === 2 && <h2 className="mobile-tab-title mobile-only">Links to my stuff</h2>}
+          { activeIntroScreen === 1 && <h2 className="mobile-tab-title mobile-only">Links to my stuff</h2>}
           <PerfectScrollbar>
           { activeIntroScreen === 0 &&
             <div className="intro-tab-contents-inner">
@@ -56,31 +49,6 @@ const IntroModal: FC<IntroModalProps> = ({ introModalOpen, setIntroModalOpen }) 
             </div>
           }
           { activeIntroScreen === 1 &&
-            <div className="intro-tab-contents-inner">
-              <p><strong className="brand-color">teammates</strong> is implemented using a React front-end, and a Node.js back-end. It is automatically deployed to heroku from the github repository.</p>
-              <h2>React front-end</h2>
-              <p>The front-end utilizes React Hooks, functional components, and Apollo/GraphQL queries extensively. Jest is used for unit testing.</p>
-              <h3>Features</h3>
-              <ul>
-                <li><strong>Employee list</strong>: The app displays a list of people pulled from the back-end.</li>
-                <li><strong>Filtering</strong>: The app allows you to filter down users in real-time by a text string.</li>
-                <li><strong>Details panel</strong>: Selecting a user from the list shows their complete details in a separate panel.</li>
-                <li><strong>Edit employee</strong>: The user may edit the details for an employee on the details panel. Changes are saved to the server and the application is refreshed 2 seconds after the last modification.</li>
-              </ul>
-              <h2>Node.js back-end</h2>
-              <p>The back-end is a very simple server script provided by this repository (slightly modified to add some extra data and serve the React page). The data set is pulled from a random person generator API, which is refreshed each time the server is re-activated.</p>
-              <h2>Everyone is a Front-End Developer...</h2>
-              <p>...because the API that generates randomized people does not provide a job position.</p>
-              <h2>Future ideas</h2>
-              <ul>
-                <li>Add the ability to add and remove employees from the data set.</li>
-                <li>More extensive sorting functionality would be nice (alphabetical order, etc).</li>
-                <li>Incorporate useContext for some of the more deeply nested props.</li>
-              </ul>
-            </div>
-
-          }
-          { activeIntroScreen === 2 &&
             <div className="intro-tab-contents-inner">
               <h3>My personal website</h3>
               <p><a href="https://www.valentinsigalov.com/" target="_blank">https://www.valentinsigalov.com/</a></p>

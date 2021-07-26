@@ -1,9 +1,9 @@
 # teammates
-teammates is a demo for a simple, React-based employee directory application.
-
-This demo is not intended for serious use. The data set is randomly generated each time the Node server is re-run. So, feel free to mess around!
+teammates is a demo for a simple, React-based employee directory application. It is probably hosted at [https://teammates-demo.herokuapp.com/](https://teammates-demo.herokuapp.com/).
 
 Created by [prokhorvlg (Valentin Sigalov)](https://github.com/prokhorvlg).
+
+Note that everyone is a Front-End Developer because the API that generates randomized people does not provide a job position, but I still wanted that field for the appearance :)
 
 ## Contents
 
@@ -59,3 +59,10 @@ The node server *must* be run before the React client app can function. Assuming
 1. Commit and push changes to 'main'.
 2. Heroku should automatically build when the push is complete.
 3. Visit [https://teammates-demo.herokuapp.com/](https://teammates-demo.herokuapp.com/). (Heroku can be... shaky sometimes.)
+
+## Future ideas
+* Add randomized job titles to the node server.
+* Add the ability to add and remove employees from the data set.
+* More extensive sorting functionality would be nice (alphabetical order, etc).
+* Incorporate useContext for some of the more deeply nested props.
+

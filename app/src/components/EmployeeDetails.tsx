@@ -141,7 +141,7 @@ const EmployeeDetails: FC<EmployeeDetailsProps> = ({ employees, selectedEmployee
             <ul className="details-list">
               <li className="details-list-item edit-mode">
                 <p><FontAwesomeIcon icon={faUser} className="fa-link-icon" /> First Name</p>
-                <input type="text" onChange={(e) => { onEmployeeInput(e.target.value, 'first'); }} value={selectedEmployeeData.name.first} />
+                <input type="text" onChange={(e) => { onEmployeeInput(e.target.value, 'first'); }} value={selectedEmployeeData.name.first} data-testid="first-name-input"/>
               </li>
               <li className="details-list-item edit-mode">
                 <p><FontAwesomeIcon icon={faUser} className="fa-link-icon" /> Last Name</p>
