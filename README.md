@@ -1,40 +1,61 @@
 # teammates
-## A demo employee directory project.
+teammates is a demo for a simple, React-based employee directory application.
 
-Welcome to the Firstbase Frontend Coding Challenge.
+This demo is not intended for serious use. The data set is randomly generated each time the Node server is re-run. So, feel free to mess around!
 
-All of the instructions to complete this challenge are found in this readme. If you have any questions please e-mail the hiring manager you are working with.
+Created by [prokhorvlg (Valentin Sigalov)](https://github.com/prokhorvlg).
 
-## Objectives
-* Assessing experience with Typescript
-* Assessing experience with ReactJS
-* Assessing experience with Testing in React Projects
-* Asessing an understanding of best practices for ReactJS and Typescript development
+## Contents
 
-## The Challenge
-You will build a react js application that allows a user to view, edit, and search an employee directory. The employee directory is implemented with a GraphQL API located in this git repository.
+This repository contains two projects (nested):
+* **Node server**: A simple server script provided by [this repository](https://github.com/FirstbaseHQ/frontend-coding-challenge) can be found within the 'server' folder.
+* **React app**: The full React-based front-end can be found within the 'app' folder.
 
-### Use Cases
-* As a user I should be able to view the entire employee directory
-* As a user I should be able to edit an employee
-* As a user I should be able to search for employees with a search bar (client side)
-* As a user I should be able to view all the information for a single employee
+## Technologies
 
-No image uploading is required here. The API doesn't support it.
+* **React** (JavaScript framework, React hooks, functional components)
+* **TypeScript** (interfaces, types)
+* **GraphQL**, **Apollo** (API, queries)
+* **Node** (server) (mostly provided by Firstbase)
+* **Jest**, **React Testing Library** (user-experience-oriented unit testing)
 
+## Features
 
-The design and presentation of this is entirely up to you. Remember this is a chance to show off your skills.
+* **Loads and displays data** from the node server using a GraphQL query and displays it as a list
+* **Filter/search** through employees using a text input
+* **Select an employee** and **edit their data**, which sends a GraphQL query to the server and refreshes the data
+* **Responsive** and usable on mobile
 
-## API Instructions
-1. `$ git clone git@github.com:FirstbaseHQ/frontend-coding-challenge.git`
-2. `$ cd frontend-coding-challenge`
-3. `$ npm install`
-4. `$ npm start`
+## How to Run
 
-GraphQL GraphiQL tool / documentation url:
-https://localhost:8080/graphiql
+The node server *must* be run before the React client app can function. Assuming you have already cloned the repository...
 
-## I'm done now what?
-Congratulations on finishing!
+### Node Server
 
-Please send the hiring manage a link to the git repo with your solution. Once they review they will be in touch.
+1. Open console in this folder.
+2. Run `npm install`.
+3. Run `npm start`.
+
+### React App
+
+#### Run the App
+
+1. Open console on this folder.
+2. Run `cd app` to open the client app folder.
+3. Run `npm install`.
+4. Run `npm start`.
+5. Visit `localhost:5000` if the app does not automatically open in browser.
+
+#### Run the Unit Tests
+
+1. Open console on this folder.
+2. Run `cd app` to open the client app folder.
+3. Run `npm install`.
+4. Run `npm test`.
+5. The Jest test results should appear in your console after running.
+
+## How to Deploy (heroku)
+
+1. Commit and push changes to 'main'.
+2. Heroku should automatically build when the push is complete.
+3. Visit [https://teammates-demo.herokuapp.com/](https://teammates-demo.herokuapp.com/). (Heroku can be... shaky sometimes.)
