@@ -26,29 +26,32 @@ This repository contains two projects (nested):
 * **Select an employee** and **edit their data**, which sends a GraphQL query to the server and refreshes the data
 * **Responsive** and usable on mobile
 
-## How to Run
+## How to Set Up and Run
 
-The node server *must* be run before the React client app can function. Assuming you have already cloned the repository...
+Before starting, clone the repository using `git clone https://github.com/prokhorvlg/teammates.git`.
 
 ### Node Server
 
-1. Open console in this folder.
+The node server *must* be run before the React client app can function.
+
+1. Open terminal in the base folder of the repository.
 2. Run `npm install`.
 3. Run `npm start`.
+4. The terminal should say "Server is fully operational." This means the server is online.
 
 ### React App
 
 #### Run the App
 
-1. Open console on this folder.
+1. Open terminal on this folder (different from the server terminal).
 2. Run `cd app` to open the client app folder.
 3. Run `npm install`.
 4. Run `npm start`.
-5. Visit `localhost:5000` if the app does not automatically open in browser.
+5. Visit `localhost:3000` if the app does not automatically open in browser.
 
 #### Run the Unit Tests
 
-1. Open console on this folder.
+1. Open terminal on this folder.
 2. Run `cd app` to open the client app folder.
 3. Run `npm install`.
 4. Run `npm test`.
@@ -58,7 +61,7 @@ The node server *must* be run before the React client app can function. Assuming
 
 1. Commit and push changes to 'main'.
 2. Heroku should automatically build when the push is complete.
-3. Visit [https://teammates-demo.herokuapp.com/](https://teammates-demo.herokuapp.com/). (Heroku can be... shaky sometimes.)
+3. Visit [https://teammates-demo.herokuapp.com/](https://teammates-demo.herokuapp.com/). (Heroku can be shaky sometimes, so it may not always be online!)
 
 ## Future ideas
 * Add randomized job titles to the node server.
