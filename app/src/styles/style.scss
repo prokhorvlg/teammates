@@ -26,6 +26,7 @@ p, input, button, li, a {
 
 html, body, #root {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -47,6 +48,42 @@ a {
 }
 .ps:hover, .ps:hover > .ps__rail-y, .ps:hover .ps__thumb-y {
   opacity: 1 !important;
+}
+
+// For the modal
+.closed {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.2s linear;
+  pointer-events: none;
+  user-select: none;
+}
+.open {
+  visibility: visible;
+  transition: visibility 0.2s, opacity 0.2s linear;
+  opacity: 1;
+}
+
+// For the panels
+@media (max-width: $breakpoint-med) {
+  .body-employee-list, .body-employee-details {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    min-height: -webkit-fill-available;
+  }
+  .mobile-active {
+    visibility: visible;
+    transition: visibility 0.2s, opacity 0.2s linear;
+    opacity: 1;
+  }
+  .mobile-inactive {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s linear;
+    user-select: none;
+    pointer-events: none;
+  }
 }
 
 body {
@@ -80,9 +117,6 @@ body {
         .ps__thumb-y {
           background: $brand-highlight;
         }
-      }
-      &.closed {
-        display: none;
       }
       .intro-header {
         display: flex;
@@ -168,7 +202,6 @@ body {
         @media (max-width: $breakpoint-med) {
           height: auto;
           flex: 1;
-          //border: 3px solid $brand-highlight;
           padding: 0;
           max-width: 90%;
         }
@@ -293,10 +326,13 @@ body {
         height: calc(100% - 90px);
         max-height: 100%;
         padding: 0 40px 0 40px;
+        position: relative;
 
         @media (max-width: $breakpoint-med) {
-          height: calc(100% - 80px);
-          padding: 0 10px 0 10px;
+          //height: calc(100% - 80px);
+          padding: 0;
+          width: 100%;
+          justify-content: center;
         }
 
         .body-employee-list {
@@ -478,7 +514,7 @@ body {
           border-radius: 20px;
           background: white;
           @media (max-width: $breakpoint-med) {
-            width: 100%;
+            width: 90%;
             margin: 0;
             min-width: auto;
           }
@@ -648,19 +684,9 @@ body {
     display: block;
   }
 }
-
 .desktop-only {
   display: block;
   @media (max-width: $breakpoint-med) {
     display: none;
-  }
-}
-
-@media (max-width: $breakpoint-med) {
-  .mobile-active {
-    display: block;
-  }
-  .mobile-inactive {
-    display: none !important;
   }
 }

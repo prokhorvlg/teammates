@@ -38,7 +38,6 @@ const EmployeeDetails: FC<EmployeeDetailsProps> = ({ employees, selectedEmployee
   const [updateEmployee] = useMutation<EditPerson>(UPDATE_EMPLOYEE);
 
   const saveEmployeeDebounce = useDebouncedCallback((updateEmployeeObject) => {
-    console.log(updateEmployeeObject);
     updateEmployee({
       variables: updateEmployeeObject
     }).then(() => {

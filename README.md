@@ -66,3 +66,6 @@ The node server *must* be run before the React client app can function. Assuming
 * More extensive sorting functionality would be nice (alphabetical order, etc).
 * Incorporate useContext for some of the more deeply nested props.
 
+## Failures
+* I was unable to find a way to simulate Apollo's refetch functionality in my unit test suite, as none of the online solutions work with modern versions of Apollo, and Apollo's documentation did not provide any answers. This is something I would want to consult an expert with to fix and learn!
+

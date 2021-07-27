@@ -11,7 +11,7 @@ import FoundCountBar from './FoundCountBar';
 import IntroModal from './IntroModal';
 
 import { GET_EMPLOYEES } from '../queries/queries';
-import { Employees, Person, Name, Picture } from '../types/interfaces'
+import { Employees } from '../types/interfaces'
 
 export const App = () => {
   // STATE: Contains relevant data for application.
@@ -66,7 +66,7 @@ export const App = () => {
           <h1><span>team</span>mates</h1>
           <p className="desktop-only">Employee Directory</p>
           <div className="intro-modal-open-container">
-            <button onClick={() => { setIntroModalOpen(true); }} className="intro-modal-open">
+            <button onClick={() => { setIntroModalOpen(true); }} className="intro-modal-open" data-testid="intro-modal-open">
               <FontAwesomeIcon icon={faQuestion} className="fa-icon" />
             </button>
           </div>

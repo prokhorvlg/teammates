@@ -14,7 +14,7 @@ const IntroModal: FC<IntroModalProps> = ({ introModalOpen, setIntroModalOpen }) 
   const [activeIntroScreen, setActiveIntroScreen] = useState(0);
 
   return (
-    <div className={"intro-modal" + ((introModalOpen) ? " open" : " closed")}>
+    <div className={"intro-modal" + ((introModalOpen) ? " open" : " closed")} data-testid="intro-modal">
       <div className="intro-header">
         <p>Welcome to</p>
         <h1><span>team</span>mates!</h1>
@@ -28,7 +28,7 @@ const IntroModal: FC<IntroModalProps> = ({ introModalOpen, setIntroModalOpen }) 
             </button>
           </li>
           <li>
-            <button onClick={() => { setActiveIntroScreen(1); }} className={(activeIntroScreen === 1) ? "active" : ""}>
+            <button onClick={() => { setActiveIntroScreen(1); }} className={(activeIntroScreen === 1) ? "active" : ""} data-testid="intro-tab-2">
               <FontAwesomeIcon icon={faLink} className="fa-icon" />
               <p>Links to my stuff</p>
             </button>
@@ -61,7 +61,7 @@ const IntroModal: FC<IntroModalProps> = ({ introModalOpen, setIntroModalOpen }) 
           </PerfectScrollbar>
         </div>
 
-      <button onClick={() => { setIntroModalOpen(false); }} className="intro-modal-close">
+      <button onClick={() => { setIntroModalOpen(false); }} className="intro-modal-close" data-testid="intro-modal-close">
         <p>Enter Site</p>
         <FontAwesomeIcon icon={faArrowRight} className="fa-icon" />
       </button>
